@@ -1,81 +1,132 @@
-# Global Energy Pattern Classification using Ensemble Machine Learning Models
+# Global Energy Pattern Classification
 
-This project builds and compares multiple machine learning classifiers to predict the `continent` label from numeric global energy indicators in `global_energy_analytics.csv`.
+An end-to-end machine learning project that predicts `continent` from global energy indicators using multiple classification models, evaluation metrics, cross-validation, and visual analytics.
 
-The script handles preprocessing, model training, evaluation, and visualization in one end-to-end pipeline.
+## Key Highlights
 
-## What The Script Does
+- End-to-end reproducible ML workflow in one script
+- Comparison of 7 classification models with multiple metrics
+- Cross-validation and learning-curve based model reliability checks
+- Hyperparameter tuning for ensemble models
+- Export-ready CSV reports and publication-style plots
 
-The main workflow in `commands.py`:
+## Snapshot
 
-1. Loads `global_energy_analytics.csv`
-2. Cleans data:
-- Removes duplicate rows
-- Standardizes column names (lowercase, underscores)
-- Drops rows with missing target values (`continent`)
-3. Selects numeric feature columns only
-4. Encodes target labels using `LabelEncoder`
-5. Splits data into train/test with stratification (`test_size=0.2`, `random_state=42`)
-6. Builds a preprocessing pipeline:
-- Median imputation for missing numeric values
-- Standard scaling
-7. Trains and evaluates multiple classifiers:
+| Item | Details |
+|---|---|
+| Problem Type | Multiclass Classification |
+| Target Column | `continent` |
+| Input File | `global_energy_analytics.csv` |
+| Script | `commands.py` |
+| Output Folder | `output/` |
+
+## Pipeline Overview
+
+The workflow in `commands.py` includes:
+
+1. Data loading and cleaning
+2. Numeric feature selection and label encoding
+3. Train/test split with stratification
+4. Imputation + scaling via preprocessing pipeline
+5. Training 7 ML models
+6. Performance comparison (Accuracy, Precision, Recall, F1, ROC-AUC)
+7. 5-fold cross-validation
+8. Best-model diagnostics and visualizations
+9. Learning curve analysis
+10. Hyperparameter tuning (Random Forest, Extra Trees)
+
+## Models Used
+
 - Logistic Regression
 - K-Nearest Neighbors (KNN)
 - Decision Tree
-- Support Vector Machine (RBF kernel)
+- Support Vector Machine (RBF)
 - Random Forest
 - Gradient Boosting
 - Extra Trees
-8. Compares model accuracies and selects the best model
-9. Generates visual analysis:
-- Model accuracy bar chart
-- Confusion matrix for the best model
-- PCA 2D projection plot
-- Correlation heatmap
-- Class distribution chart
-- Feature histograms
-10. Exports predictions and metrics to CSV files
 
-## Tech Stack
+## Quick Start
 
-- Python
-- pandas, numpy
-- scikit-learn
-- matplotlib
-
-## How To Run
-
-1. Install dependencies:
+1. Install dependencies
 
 ```bash
 pip install pandas numpy matplotlib scikit-learn
 ```
 
-2. From the project root, run:
+2. Run the script
 
 ```bash
 python commands.py
 ```
 
-## Generated Outputs
+## Project Structure
 
-The script writes the following files in the project root:
+```text
+Comprehensive Energy Analytics/
+|-- commands.py
+|-- global_energy_analytics.csv
+|-- README.md
+`-- output/
+	|-- model_comparison_results_extended.csv
+	|-- classwise_classification_report.csv
+	|-- cross_validation_results.csv
+	|-- learning_curve_results.csv
+	|-- hyperparameter_tuning_results.csv
+	|-- best_model_predictions.csv
+	`-- *.png visual outputs
+```
 
-- `model_comparison_results.csv`
+## Output Files
+
+All generated files are saved to `output/`.
+
+### CSV Reports
+
+- `model_comparison_results_extended.csv`
+- `classwise_classification_report.csv`
+- `cross_validation_results.csv`
+- `learning_curve_results.csv`
+- `hyperparameter_tuning_results.csv`
+- `best_model_predictions.csv`
+
+### Visual Outputs
+
 - `model_accuracy_comparison.png`
+- `precision_recall_f1_comparison.png`
+- `cross_validation_accuracy.png`
 - `best_model_confusion_matrix.png`
-- `feature_importance.csv` (only if the best model supports feature importances)
-- `feature_importance_top10.png` (only if the best model supports feature importances)
+- `best_model_multiclass_roc_curve.png`
+- `feature_importance_top10.png` (if supported by best model)
 - `pca_projection.png`
 - `correlation_heatmap.png`
 - `class_distribution.png`
 - `feature_histograms.png`
-- `best_model_predictions.csv`
+- `learning_curve_best_model.png`
+
+### Conditional Output
+
+- `feature_importance.csv` (generated only when the selected best model exposes feature importances)
+
+## Evaluation Metrics Tracked
+
+The project tracks model quality using:
+
+- Accuracy
+- Precision (weighted)
+- Recall (weighted)
+- F1 Score (weighted)
+- ROC-AUC (multiclass one-vs-rest, where supported)
+
+## Reproducibility
+
+- Fixed random seed (`random_state=42`) in train/test split and model configurations where available
+- Stratified split to preserve class distribution
+- Output artifacts saved consistently in `output/` for easier reruns and comparison
 
 ## Notes
 
-- The target column is fixed as `continent`.
-- Only numeric feature columns are used for model training.
-- If no numeric columns are available, the script raises an error.
-- If `continent` is missing from the dataset, the script raises an error.
+- Column names are standardized to lowercase with underscores.
+- Duplicate rows are removed.
+- Rows with missing `continent` values are dropped.
+- Only numeric columns are used as model features.
+- The script raises an error if `continent` is missing or if no numeric features are found.
