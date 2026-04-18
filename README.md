@@ -1,75 +1,81 @@
-# Global Energy Analytics – Clustering & Visualization
+# Global Energy Pattern Classification using Ensemble Machine Learning Models
 
-This project focuses on analyzing **global energy data** using **Machine Learning Algorithm(K means)** to uncover hidden patterns and groupings across multiple energy-related metrics. The clustered results are further visualized through an **interactive Tableau dashboard** for better interpretation and decision-making.
+This project builds and compares multiple machine learning classifiers to predict the `continent` label from numeric global energy indicators in `global_energy_analytics.csv`.
 
----
+The script handles preprocessing, model training, evaluation, and visualization in one end-to-end pipeline.
 
-## Project Overview
+## What The Script Does
 
-- Performed **unsupervised machine learning (K-Means)** on large-scale energy data using PySpark.
-- Applied **data preprocessing**, null handling, feature engineering, and **standardization**.
-- Evaluated clustering quality using the **Silhouette Score**.
-- Exported results and built a **Tableau dashboard** to visually explore energy clusters.
+The main workflow in `commands.py`:
 
----
+1. Loads `global_energy_analytics.csv`
+2. Cleans data:
+- Removes duplicate rows
+- Standardizes column names (lowercase, underscores)
+- Drops rows with missing target values (`continent`)
+3. Selects numeric feature columns only
+4. Encodes target labels using `LabelEncoder`
+5. Splits data into train/test with stratification (`test_size=0.2`, `random_state=42`)
+6. Builds a preprocessing pipeline:
+- Median imputation for missing numeric values
+- Standard scaling
+7. Trains and evaluates multiple classifiers:
+- Logistic Regression
+- K-Nearest Neighbors (KNN)
+- Decision Tree
+- Support Vector Machine (RBF kernel)
+- Random Forest
+- Gradient Boosting
+- Extra Trees
+8. Compares model accuracies and selects the best model
+9. Generates visual analysis:
+- Model accuracy bar chart
+- Confusion matrix for the best model
+- PCA 2D projection plot
+- Correlation heatmap
+- Class distribution chart
+- Feature histograms
+10. Exports predictions and metrics to CSV files
 
 ## Tech Stack
 
-- **PySpark**
-- **Apache Spark MLlib**
-- **Python**
-- **Tableau**
-- **CSV Dataset**
+- Python
+- pandas, numpy
+- scikit-learn
+- matplotlib
 
----
+## How To Run
 
-## Workflow
+1. Install dependencies:
 
-1. Load global energy dataset using PySpark
-2. Drop missing values for clean analysis
-3. Automatically detect numeric columns
-4. Assemble features using `VectorAssembler`
-5. Standardize data with `StandardScaler`
-6. Apply **K-Means clustering (k = 4)**
-7. Evaluate model using **Silhouette Score**
-8. Export clustered data for visualization
-9. Build an interactive Tableau dashboard
+```bash
+pip install pandas numpy matplotlib scikit-learn
+```
 
----
+2. From the project root, run:
 
-## Model Performance
+```bash
+python commands.py
+```
 
-- **Algorithm:** K-Means Clustering
-- **Number of Clusters:** 4
-- **Evaluation Metric:** Silhouette Score
-- **Feature Scaling:** StandardScaler (Mean & Std)
+## Generated Outputs
 
----
+The script writes the following files in the project root:
 
-## Tableau Dashboard
+- `model_comparison_results.csv`
+- `model_accuracy_comparison.png`
+- `best_model_confusion_matrix.png`
+- `feature_importance.csv` (only if the best model supports feature importances)
+- `feature_importance_top10.png` (only if the best model supports feature importances)
+- `pca_projection.png`
+- `correlation_heatmap.png`
+- `class_distribution.png`
+- `feature_histograms.png`
+- `best_model_predictions.csv`
 
-The Tableau dashboard provides:
-- Clear visualization of energy clusters
-- Comparative analysis across regions and metrics
-- Easy-to-understand insights derived from clustering results
+## Notes
 
-*Dashboard file is included in the repository.*
-
-<div style="display:flex; flex-wrap:wrap; gap:12px;">
-<img  alt="Screenshot 2026-01-04 at 2 52 17 PM" src="https://github.com/user-attachments/assets/7f2d6c67-da2e-4918-bba3-dfed86cd8861" />
-<img width="440" height="520" alt="Screenshot 2026-01-04 at 2 52 36 PM" src="https://github.com/user-attachments/assets/40a4c77d-83f9-4084-87f0-f952b4d4eaa8" />
-<img width="440" height="520" alt="Screenshot 2026-01-04 at 2 52 48 PM" src="https://github.com/user-attachments/assets/71cc51ae-1947-4835-9637-b18d2c1af5b5" />
-<img  alt="Screenshot 2026-01-04 at 2 53 11 PM" src="https://github.com/user-attachments/assets/30b1c0a5-f44e-48a2-b346-dd40089a1ed1" />
-</div>
-
----
-
-## Key Learnings
-
-- Handling large datasets efficiently using PySpark
-- Importance of feature scaling in clustering
-- Practical application of unsupervised learning
-- Transforming ML outputs into meaningful visual insights
-
-
-⭐ If you find this project useful, feel free to star the repository!
+- The target column is fixed as `continent`.
+- Only numeric feature columns are used for model training.
+- If no numeric columns are available, the script raises an error.
+- If `continent` is missing from the dataset, the script raises an error.
