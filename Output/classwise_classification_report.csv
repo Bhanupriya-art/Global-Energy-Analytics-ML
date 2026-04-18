@@ -1,0 +1,43 @@
+Model,Class,Precision,Recall,F1-Score,Support
+Logistic Regression,Africa,1.0,0.6666666666666666,0.8,15.0
+Logistic Regression,Asia,0.9493670886075949,1.0,0.974025974025974,75.0
+Logistic Regression,Europe,0.9710144927536232,0.9571428571428572,0.9640287769784173,70.0
+Logistic Regression,North America,0.8125,0.8666666666666667,0.8387096774193549,15.0
+Logistic Regression,Oceania,1.0,0.2,0.3333333333333333,5.0
+Logistic Regression,South America,0.8,1.0,0.8888888888888888,20.0
+KNN,Africa,1.0,0.6666666666666666,0.8,15.0
+KNN,Asia,0.9733333333333334,0.9733333333333334,0.9733333333333334,75.0
+KNN,Europe,1.0,1.0,1.0,70.0
+KNN,North America,1.0,1.0,1.0,15.0
+KNN,Oceania,0.6,0.6,0.6,5.0
+KNN,South America,0.8,1.0,0.8888888888888888,20.0
+Decision Tree,Africa,1.0,0.9333333333333333,0.9655172413793104,15.0
+Decision Tree,Asia,0.9868421052631579,1.0,0.9933774834437086,75.0
+Decision Tree,Europe,1.0,0.9857142857142858,0.9928057553956835,70.0
+Decision Tree,North America,0.9375,1.0,0.967741935483871,15.0
+Decision Tree,Oceania,1.0,0.8,0.8888888888888888,5.0
+Decision Tree,South America,0.9523809523809523,1.0,0.975609756097561,20.0
+SVM,Africa,1.0,0.6,0.75,15.0
+SVM,Asia,0.9375,1.0,0.967741935483871,75.0
+SVM,Europe,0.9333333333333333,1.0,0.9655172413793104,70.0
+SVM,North America,1.0,0.6666666666666666,0.8,15.0
+SVM,Oceania,0.0,0.0,0.0,5.0
+SVM,South America,0.7692307692307693,1.0,0.8695652173913043,20.0
+Random Forest,Africa,1.0,0.9333333333333333,0.9655172413793104,15.0
+Random Forest,Asia,1.0,1.0,1.0,75.0
+Random Forest,Europe,1.0,1.0,1.0,70.0
+Random Forest,North America,1.0,1.0,1.0,15.0
+Random Forest,Oceania,1.0,1.0,1.0,5.0
+Random Forest,South America,0.9523809523809523,1.0,0.975609756097561,20.0
+Gradient Boosting,Africa,1.0,0.9333333333333333,0.9655172413793104,15.0
+Gradient Boosting,Asia,1.0,1.0,1.0,75.0
+Gradient Boosting,Europe,1.0,1.0,1.0,70.0
+Gradient Boosting,North America,1.0,1.0,1.0,15.0
+Gradient Boosting,Oceania,1.0,1.0,1.0,5.0
+Gradient Boosting,South America,0.9523809523809523,1.0,0.975609756097561,20.0
+Extra Trees,Africa,1.0,1.0,1.0,15.0
+Extra Trees,Asia,1.0,1.0,1.0,75.0
+Extra Trees,Europe,1.0,1.0,1.0,70.0
+Extra Trees,North America,1.0,1.0,1.0,15.0
+Extra Trees,Oceania,1.0,1.0,1.0,5.0
+Extra Trees,South America,1.0,1.0,1.0,20.0
